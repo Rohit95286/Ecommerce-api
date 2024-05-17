@@ -7,10 +7,10 @@ const productRouter = require("express").Router();
 // create a product => verify if jwt is verifired , if user is admin // middlewares
 
 productRouter.post('/' ,[JWTMiddleWare , isUserAdmin]  ,async (req , res)=>{
-    const {name , price , description , quantity} = req?.body;
+    const {name , price , description , quantity , customerId} = req?.body;
     try{
-        const productData = new product({name , description , price , quantity});
-        const saveProduct = await productData.save()
+        const productData = {name , description , price , quantity};
+        const saveProduct = await productData..findByIdAndUpdate(customerId, { $set: productData })
         res.status(200).send(saveProduct);
     }
     catch(error){
